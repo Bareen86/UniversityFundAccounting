@@ -1,6 +1,6 @@
-﻿namespace Corpuses.Application.CQRSActions.Commands.UpdateCorpuse
+﻿namespace Corpuses.Application.CQRSActions.DTOs
 {
-    public class UpdateCorpuseCommand
+    public class GetCorpuseQueryDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

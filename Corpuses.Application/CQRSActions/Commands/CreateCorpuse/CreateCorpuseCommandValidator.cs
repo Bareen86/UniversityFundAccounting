@@ -31,7 +31,7 @@ namespace Corpuses.Application.CQRSActions.Commands.CreateCorpuse
 
             if ( await _corpuseRepository.GetByNameAndAddressAsync( command.Name, command.Address ) != null )
             {
-                return ValidationResult.Fail( "Такой корпус уже есть на указанном адресе" );
+                return ValidationResult.Fail( "Такой корпус уже есть в указанном адресе" );
             }
             return ValidationResult.Ok();
         }

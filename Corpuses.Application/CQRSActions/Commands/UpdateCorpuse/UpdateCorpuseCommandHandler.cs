@@ -4,31 +4,31 @@ using Corpuses.Application.Validation;
 using Corpuses.Domain;
 using Corpuses.Domain.Repositories;
 
-namespace Corpuses.Application.CQRSActions.Commands.DeleteCorpuse.DeleteCorpuseCommand
+namespace Corpuses.Application.CQRSActions.Commands.UpdateCorpuse
 {
-    public class DeleteCorpuseCommandHandler : ICommandHandler<DeleteCorpuseCommand>
+    public class UpdateCorpuseCommandHandler : ICommandHandler<UpdateCorpuseCommand>
     {
         private readonly ICorpuseRepository _corpuseRepository;
-        private readonly IAsyncValidator<DeleteCorpuseCommand> _deleteCorpuseCommandValidator;
+        private readonly IAsyncValidator<UpdateCorpuseCommand> _updateCorpuseCommandValidator;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteCorpuseCommandHandler(
+        public UpdateCorpuseCommandHandler(
             ICorpuseRepository corpuseRepository,
-            IAsyncValidator<DeleteCorpuseCommand> validator,
+            IAsyncValidator<UpdateCorpuseCommand> validator,
             IUnitOfWork unitOfWork )
         {
             _corpuseRepository = corpuseRepository;
-            _deleteCorpuseCommandValidator = validator;
+            _updateCorpuseCommandValidator = validator;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CommandResult> HandleAsync( DeleteCorpuseCommand command )
+        public async Task<CommandResult> HandleAsync( UpdateCorpuseCommand command )
         {
-            ValidationResult validationResult = await _deleteCorpuseCommandValidator.ValidationAsync( command );
+            ValidationResult validationResult = await _updateCorpuseCommandValidator.ValidationAsync( command );
             if ( !validationResult.IsFail )
             {
                 Corpuse corpuse = await _corpuseRepository.GetByIdAsync( command.Id );
-                _corpuseRepository.Add(corpuse );
+                corpuse.Update(command.Name, command.Address, command.FloorsNumber);
                 await _unitOfWork.CommitAsync();
             }
             return new CommandResult( validationResult );
