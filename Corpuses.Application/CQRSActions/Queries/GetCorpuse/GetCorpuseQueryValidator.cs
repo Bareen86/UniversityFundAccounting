@@ -14,7 +14,7 @@ namespace Corpuses.Application.CQRSActions.Queries.GetCorpuse
 
         public async Task<ValidationResult> ValidationAsync( GetCorpuseQuery query )
         {
-            if ( await _corpuseRepository.GetByIdAsync( query.Id ) != null )
+            if ( await _corpuseRepository.GetByIdAsync( query.Id ) == null )
             {
                 return ValidationResult.Fail( "Корпуса с таким id нет" );
             }

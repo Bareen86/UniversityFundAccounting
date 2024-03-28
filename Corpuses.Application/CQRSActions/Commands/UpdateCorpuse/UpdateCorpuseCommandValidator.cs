@@ -14,6 +14,21 @@ namespace Corpuses.Application.CQRSActions.Commands.UpdateCorpuse
 
         public async Task<ValidationResult> ValidationAsync( UpdateCorpuseCommand command )
         {
+            if ( command.Name == null || command.Name == String.Empty )
+            {
+                return ValidationResult.Fail( "Имя корпуса не должно быть пустым" );
+            }
+
+            if ( command.Address == null || command.Address == String.Empty )
+            {
+                return ValidationResult.Fail( "Адресс не должен быть пустым" );
+            }
+
+            if ( command.FloorsNumber <= 0 )
+            {
+                return ValidationResult.Fail( "В корпусе должен быть минимум 1 этаж" );
+            }
+
             if ( await _corpuseRepository.GetByIdAsync( command.Id ) == null )
             {
                 return ValidationResult.Fail( "Корпуса с таким id нет" );
