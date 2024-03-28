@@ -18,7 +18,7 @@ namespace Corpuses.Application.CQRSActions.Commands.DeleteCorpuse.DeleteCorpuseC
             {
                 return ValidationResult.Fail("Корпуса с таким id нет");
             }
-
+                
             return ValidationResult.Ok();
         }
     }

@@ -28,7 +28,7 @@ namespace Corpuses.Application.CQRSActions.Commands.DeleteCorpuse.DeleteCorpuseC
             if ( !validationResult.IsFail )
             {
                 Corpuse corpuse = await _corpuseRepository.GetByIdAsync( command.Id );
-                _corpuseRepository.Add(corpuse );
+                _corpuseRepository.Delete(corpuse );
                 await _unitOfWork.CommitAsync();
             }
             return new CommandResult( validationResult );

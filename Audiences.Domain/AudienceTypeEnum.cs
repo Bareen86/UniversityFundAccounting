@@ -6,7 +6,8 @@
         {
             Lecture = 0,
             Practice = 1,
-            SportHall = 2
+            SportHall = 2,
+            Other = 3
         }
     }
 }

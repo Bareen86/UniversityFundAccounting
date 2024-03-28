@@ -1,7 +1,7 @@
 using Corpuses.Application;
-using Corpuses.Infrastructure.Foundation;
 using Corpuses.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Corpuses.Infrastructure.Foundation;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -21,7 +21,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCorpusesBindings();
-builder.Services.AddInfrastructure();
+builder.Services.AddCorpusesInfrastructure();
 
 var app = builder.Build();
 

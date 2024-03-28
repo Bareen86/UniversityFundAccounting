@@ -9,7 +9,7 @@ namespace Corpuses.Infrastructure
 {
     public static class InfrastructureBindings
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services )
+        public static IServiceCollection AddCorpusesInfrastructure(this IServiceCollection services )
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICorpuseRepository, CorpuseRepository>();

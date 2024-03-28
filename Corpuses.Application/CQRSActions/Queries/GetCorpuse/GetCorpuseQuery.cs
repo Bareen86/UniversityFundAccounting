@@ -2,6 +2,6 @@
 {
     public class GetCorpuseQuery
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
     }
 }

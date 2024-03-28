@@ -2,8 +2,8 @@
 {
     public class CreateCorpuseCommand
     {
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public int FloorsNumber { get; set; }
+        public string Name { get; init; }
+        public string Address { get; init; }
+        public int FloorsNumber { get; init; }
     }
 }

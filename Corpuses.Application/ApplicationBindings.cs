@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Corpuses.Application
 {
-    public static class CorpusesBindings
+    public static class ApplicationBindings
     {
         public static IServiceCollection AddCorpusesBindings(this IServiceCollection services)
         {
