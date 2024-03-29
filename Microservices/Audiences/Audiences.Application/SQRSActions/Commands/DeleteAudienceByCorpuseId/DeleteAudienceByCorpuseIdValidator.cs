@@ -1,17 +1,25 @@
 ﻿using Audiences.Application.Validation;
+using Audiences.Domain.Repositories;
 
 namespace Audiences.Application.SQRSActions.Commands.DeleteAudienceByCorpuseId
 {
     public class DeleteAudienceByCorpuseIdValidator : IAsyncValidator<DeleteAudienceByCorpuseIdCommand>
     {
-        public DeleteAudienceByCorpuseIdValidator()
+        private readonly IAudienceRepository _audienceRepository;
+
+        public DeleteAudienceByCorpuseIdValidator( IAudienceRepository audienceRepository)
         {
-            
+            _audienceRepository = audienceRepository;
         }
 
-        public Task<ValidationResult> ValidationAsync( DeleteAudienceByCorpuseIdCommand inputData )
+        public async Task<ValidationResult> ValidationAsync( DeleteAudienceByCorpuseIdCommand command )
         {
-            throw new NotImplementedException();
+            if ( await _audienceRepository.GetAudiencesByCorpuseIdAsync( command.Id) == null )
+            {
+                return ValidationResult.Fail("Аудиторий в данном корпусе нет");
+            }
+
+            return ValidationResult.Ok();
         }
     }
 }

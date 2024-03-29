@@ -26,7 +26,7 @@ namespace Audiences.Application.SQRSActions.Commands.UpdateAudience
         {
             ValidationResult validationResult = await _updateAudienceValidator.ValidationAsync( command );
             if ( !validationResult.IsFail )
-            {
+            {   
                 Audience audience = await _audienceRepository.GetAudienceByIdAsync( command.Id );
                 audience.Update( command.CorpuseId, command.Name,
                     command.AudienceType, command.Capacity, command.Floor, command.AudienceNumber );

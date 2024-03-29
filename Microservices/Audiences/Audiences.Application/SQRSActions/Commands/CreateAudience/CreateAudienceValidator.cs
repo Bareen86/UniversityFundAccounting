@@ -15,11 +15,6 @@ namespace Audiences.Application.SQRSActions.Commands.CreateAudience
 
         public async Task<ValidationResult> ValidationAsync( CreateAudienceCommand command )
         {
-            if ( !await _audienceRepository.CorpuseIsExist( command.CorpuseId ) )
-            {
-                return ValidationResult.Fail( "Такого корпуса нет" );
-            }
-
             if ( command.Name == null || command.Name == String.Empty )
             {
                 return ValidationResult.Fail( "Имя аудитории не должно быть пустым" );

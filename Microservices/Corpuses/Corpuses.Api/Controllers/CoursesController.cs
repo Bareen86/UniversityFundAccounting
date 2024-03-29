@@ -61,7 +61,7 @@ namespace Corpuses.Api.Controllers
             if ( commandResult.ValidationResult.IsFail )
             {
                 return BadRequest( commandResult );
-            }
+            }       
             return Ok( commandResult );
         }
 

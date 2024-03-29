@@ -4,7 +4,7 @@ using Audiences.Domain.Repositories;
 
 namespace Audiences.Application.SQRSActions.Queries.GetAudienceById
 {
-    public class GetAudienceByIdValidator : IAsyncValidator<GetAudiencesByCorpuseIdQuery>
+    public class GetAudienceByIdValidator : IAsyncValidator<GetAudienceByIdQuery>
     {
         private readonly IAudienceRepository _audienceRepository;
 
@@ -13,7 +13,7 @@ namespace Audiences.Application.SQRSActions.Queries.GetAudienceById
             _audienceRepository = audienceRepository;
         }
 
-        public async Task<ValidationResult> ValidationAsync( GetAudiencesByCorpuseIdQuery query )
+        public async Task<ValidationResult> ValidationAsync( GetAudienceByIdQuery query )
         {
             if ( await _audienceRepository.GetAudienceByIdAsync( query .Id) == null )
             {

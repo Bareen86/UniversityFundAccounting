@@ -8,18 +8,18 @@ using Audiences.Domain.Repositories;
 
 namespace Audiences.Application.SQRSActions.Queries.GetAudienceById
 {
-    public class GetAudienceByIdHandler : IQueryHandler<GetAudienceByIdQueryDto, GetAudiencesByCorpuseIdQuery>
+    public class GetAudienceByIdHandler : IQueryHandler<GetAudienceByIdQueryDto, GetAudienceByIdQuery>
     {
         private readonly IAudienceRepository _audienceRepository;
-        private readonly IAsyncValidator<GetAudiencesByCorpuseIdQuery> _getAudienceByCorpuseIdValidator;
+        private readonly IAsyncValidator<GetAudienceByIdQuery> _getAudienceByCorpuseIdValidator;
 
-        public GetAudienceByIdHandler( IAudienceRepository audienceRepository, IAsyncValidator<GetAudiencesByCorpuseIdQuery> asyncValidator )
+        public GetAudienceByIdHandler( IAudienceRepository audienceRepository, IAsyncValidator<GetAudienceByIdQuery> asyncValidator )
         {
             _audienceRepository = audienceRepository;
             _getAudienceByCorpuseIdValidator = asyncValidator;
         }
 
-        async Task<QueryResult<GetAudienceByIdQueryDto>> IQueryHandler<GetAudienceByIdQueryDto, GetAudiencesByCorpuseIdQuery>.HandleAsync( GetAudiencesByCorpuseIdQuery query )
+        async Task<QueryResult<GetAudienceByIdQueryDto>> IQueryHandler<GetAudienceByIdQueryDto, GetAudienceByIdQuery>.HandleAsync( GetAudienceByIdQuery query )
         {
             ValidationResult validationResult = await _getAudienceByCorpuseIdValidator.ValidationAsync( query );
             if ( validationResult.IsFail )

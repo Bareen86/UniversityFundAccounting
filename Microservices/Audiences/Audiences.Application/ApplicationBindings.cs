@@ -1,5 +1,6 @@
 ﻿using Audiences.Application.SQRSActions.Commands.CreateAudience;
 using Audiences.Application.SQRSActions.Commands.DeleteAudience;
+using Audiences.Application.SQRSActions.Commands.DeleteAudienceByCorpuseId;
 using Audiences.Application.SQRSActions.Commands.UpdateAudience;
 using Audiences.Application.SQRSActions.DTOs;
 using Audiences.Application.SQRSActions.Queries.GetAudienceByCorpuseId;
@@ -17,16 +18,18 @@ namespace Audiences.Application
             services.AddScoped<ICommandHandler<CreateAudienceCommand>, CreateAudienceHandler>();
             services.AddScoped<ICommandHandler<DeleteAudienceCommand>, DeleteAudienceHandler>();
             services.AddScoped<ICommandHandler<UpdateAudienceCommand>, UpdateAudienceHandler>();
+            services.AddScoped<ICommandHandler<DeleteAudienceByCorpuseIdCommand>, DeleteAudienceByCorpuseIdHandler>();
 
-            services.AddScoped<IQueryHandler<GetAudienceByIdQueryDto, GetAudiencesByCorpuseIdQuery>, GetAudienceByIdHandler>();
+            services.AddScoped<IQueryHandler<GetAudienceByIdQueryDto, GetAudienceByIdQuery>, GetAudienceByIdHandler>();
             services.AddScoped<IQueryHandler<IReadOnlyList<GetAudiencesByCorpuseIdQueryDto>, GetAudiencesByCorpuseIdQuery>, GetAudiencesByCorpuseIdQueryHandler>();
 
             services.AddScoped<IAsyncValidator<CreateAudienceCommand>, CreateAudienceValidator>();
             services.AddScoped<IAsyncValidator<DeleteAudienceCommand>, DeleteAudienceValidator>();
+            services.AddScoped<IAsyncValidator<DeleteAudienceByCorpuseIdCommand>, DeleteAudienceByCorpuseIdValidator>();
             services.AddScoped<IAsyncValidator<UpdateAudienceCommand>, UpdateAudienceValidator>();
 
             services.AddScoped<IAsyncValidator<GetAudiencesByCorpuseIdQuery>, GetAudiencesByCorpuseIdQueryValidator>();
-            services.AddScoped<IAsyncValidator<GetAudiencesByCorpuseIdQuery>, GetAudienceByIdValidator>();
+            services.AddScoped<IAsyncValidator<GetAudienceByIdQuery>, GetAudienceByIdValidator>();
 
             return services;
         }
