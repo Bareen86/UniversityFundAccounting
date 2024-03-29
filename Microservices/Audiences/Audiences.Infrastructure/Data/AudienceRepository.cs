@@ -18,6 +18,12 @@ namespace Audiences.Infrastructure.Data
             return false;
         }
 
+        public async Task DeleteAudiencesByCorpuseIdAsync( int id )
+        {
+            IReadOnlyList<Audience> audiences = await GetAudiencesByCorpuseIdAsync( id );
+            Entities.RemoveRange( audiences );
+        }
+            
         public async Task<Audience> GetAudienceByAudienceNumberAsync( int audienceNumber )
         {
             return await Entities.Where( x => x.AudienceNumber == audienceNumber ).FirstOrDefaultAsync();
