@@ -1,3 +1,5 @@
+/api/audiences GetCorpuses
+
 /api/audiences PostAudience
 {
   "corpuseId": 1,

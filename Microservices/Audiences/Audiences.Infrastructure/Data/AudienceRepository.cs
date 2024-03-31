@@ -1,4 +1,5 @@
-﻿using Audiences.Domain;
+﻿using System.Linq.Expressions;
+using Audiences.Domain;
 using Audiences.Domain.Repositories;
 using Audiences.Infrastructure.Foundation;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,11 @@ namespace Audiences.Infrastructure.Data
     {
         public AudienceRepository( AudiencesDbContext dbContext ) : base( dbContext )
         {
+        }
+
+        public async Task<bool> ContainsAsync( Expression<Func<Audience, bool>> predicate )
+        {
+            return await Entities.Where( predicate ).FirstOrDefaultAsync() != null;
         }
 
         public async Task<bool> CorpuseIsExist( int corpuseId )
@@ -22,11 +28,6 @@ namespace Audiences.Infrastructure.Data
         {
             IReadOnlyList<Audience> audiences = await GetAudiencesByCorpuseIdAsync( id );
             Entities.RemoveRange( audiences );
-        }
-            
-        public async Task<Audience> GetAudienceByAudienceNumberAsync( int audienceNumber )
-        {
-            return await Entities.Where( x => x.AudienceNumber == audienceNumber ).FirstOrDefaultAsync();
         }
 
         public async Task<Audience> GetAudienceByIdAsync( int id )

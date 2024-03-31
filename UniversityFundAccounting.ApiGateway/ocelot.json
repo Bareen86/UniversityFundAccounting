@@ -58,7 +58,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/corpuses/",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "GET", "POST" ]
     },
     {
       "DownstreamPathTemplate": "/api/corpuses/{corpuseId}",

@@ -4,6 +4,7 @@ using Corpuses.Application.CQRSActions.Commands.DeleteCorpuse.DeleteCorpuseComma
 using Corpuses.Application.CQRSActions.Commands.UpdateCorpuse;
 using Corpuses.Application.CQRSActions.DTOs;
 using Corpuses.Application.CQRSActions.Queries.GetCorpuse;
+using Corpuses.Application.CQRSActions.Queries.GetCorpuses;
 using Corpuses.Application.CQRSInterfaces;
 using Corpuses.Application.Results;
 using Microsoft.AspNetCore.Mvc;
@@ -18,17 +19,20 @@ namespace Corpuses.Api.Controllers
         private readonly ICommandHandler<UpdateCorpuseCommand> _updateCorpuseCommandHandler;
         private readonly ICommandHandler<DeleteCorpuseCommand> _deleleCorpuseCommandHandler;
         private readonly IQueryHandler<GetCorpuseQueryDto, GetCorpuseQuery> _getCorpuseQueryHandler;
+        private readonly IQueryHandler<IReadOnlyList<GetCorpusesQueryDto>, GetCorpusesQuery> _getCorpusesQueryHandler;
 
         public CoursesController(
             ICommandHandler<CreateCorpuseCommand> createCorpuseCommandHandler,
             ICommandHandler<UpdateCorpuseCommand> updateCorpuseCommandHandler,
             ICommandHandler<DeleteCorpuseCommand> deleleCorpuseCommandHandler,
-            IQueryHandler<GetCorpuseQueryDto, GetCorpuseQuery> getCorpuseQueryHandler )
+            IQueryHandler<GetCorpuseQueryDto, GetCorpuseQuery> getCorpuseQueryHandler,
+            IQueryHandler<IReadOnlyList<GetCorpusesQueryDto>, GetCorpusesQuery> getCorpusesQueryHandler )
         {
             _createCorpuseCommandHandler = createCorpuseCommandHandler;
             _updateCorpuseCommandHandler = updateCorpuseCommandHandler;
             _deleleCorpuseCommandHandler = deleleCorpuseCommandHandler;
             _getCorpuseQueryHandler = getCorpuseQueryHandler;
+            _getCorpusesQueryHandler = getCorpusesQueryHandler;
         }
 
 
@@ -48,6 +52,19 @@ namespace Corpuses.Api.Controllers
                 return BadRequest( commandResult );
             }
             return Ok( commandResult );
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCorpuses()
+        {
+            GetCorpusesQuery getCorpusesQuery = new GetCorpusesQuery();
+            QueryResult<IReadOnlyList<GetCorpusesQueryDto>> queryResult = await _getCorpusesQueryHandler.HandleAsync( getCorpusesQuery );
+
+            if ( queryResult.ValidationResult.IsFail )
+            {
+                return BadRequest( queryResult );
+            }
+            return Ok( queryResult );
         }
 
         [HttpGet( "{corpuseId}" )]

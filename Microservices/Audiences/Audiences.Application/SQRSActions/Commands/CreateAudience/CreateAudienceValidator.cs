@@ -15,6 +15,12 @@ namespace Audiences.Application.SQRSActions.Commands.CreateAudience
 
         public async Task<ValidationResult> ValidationAsync( CreateAudienceCommand command )
         {
+
+            if ( await _audienceRepository.ContainsAsync( a => a.AudienceNumber == command.AudienceNumber && a.CorpuseId == command.CorpuseId) )
+            {
+                return ValidationResult.Fail("Аудитория в таком корпусе уже есть");
+            }
+
             if ( command.Name == null || command.Name == String.Empty )
             {
                 return ValidationResult.Fail( "Имя аудитории не должно быть пустым" );
@@ -38,11 +44,6 @@ namespace Audiences.Application.SQRSActions.Commands.CreateAudience
             if ( command.AudienceNumber <= 0 )
             {
                 return ValidationResult.Fail( "Номер аудитории должен быть больше 0" );
-            }
-
-            if ( await _audienceRepository.GetAudienceByAudienceNumberAsync( command.AudienceNumber ) != null )
-            {
-                return ValidationResult.Fail( "Аудитория с таким номером уже есть" );
             }
 
             return ValidationResult.Ok();
