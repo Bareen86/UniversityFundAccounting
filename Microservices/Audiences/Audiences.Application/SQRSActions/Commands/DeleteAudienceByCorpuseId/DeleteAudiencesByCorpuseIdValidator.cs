@@ -3,16 +3,16 @@ using Audiences.Domain.Repositories;
 
 namespace Audiences.Application.SQRSActions.Commands.DeleteAudienceByCorpuseId
 {
-    public class DeleteAudienceByCorpuseIdValidator : IAsyncValidator<DeleteAudienceByCorpuseIdCommand>
+    public class DeleteAudiencesByCorpuseIdValidator : IAsyncValidator<DeleteAudiencesByCorpuseIdCommand>
     {
         private readonly IAudienceRepository _audienceRepository;
 
-        public DeleteAudienceByCorpuseIdValidator( IAudienceRepository audienceRepository)
+        public DeleteAudiencesByCorpuseIdValidator( IAudienceRepository audienceRepository)
         {
             _audienceRepository = audienceRepository;
         }
 
-        public async Task<ValidationResult> ValidationAsync( DeleteAudienceByCorpuseIdCommand command )
+        public async Task<ValidationResult> ValidationAsync( DeleteAudiencesByCorpuseIdCommand command )
         {
             if ( await _audienceRepository.GetAudiencesByCorpuseIdAsync( command.Id) == null )
             {

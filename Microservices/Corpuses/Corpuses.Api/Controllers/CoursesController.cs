@@ -31,6 +31,25 @@ namespace Corpuses.Api.Controllers
             _getCorpuseQueryHandler = getCorpuseQueryHandler;
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCorpuse( [FromBody] CreateCorpuseDto createCorpuseRequest )
+        {
+            CreateCorpuseCommand createCorpuseCommand = new CreateCorpuseCommand()
+            {
+                Name = createCorpuseRequest.Name,
+                Address = createCorpuseRequest.Address,
+                FloorsNumber = createCorpuseRequest.FloorsNumber,
+            };
+            CommandResult commandResult = await _createCorpuseCommandHandler.HandleAsync( createCorpuseCommand );
+
+            if ( commandResult.ValidationResult.IsFail )
+            {
+                return BadRequest( commandResult );
+            }
+            return Ok( commandResult );
+        }
+
         [HttpGet( "{corpuseId}" )]
         public async Task<IActionResult> GetCorpuse( [FromRoute] int corpuseId )
         {
@@ -47,26 +66,8 @@ namespace Corpuses.Api.Controllers
             return Ok( queryResult );
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateCorpuse( [FromBody] CreateCorpuseDto createCorpuseRequest )
-        {
-            CreateCorpuseCommand createCorpuseCommand = new CreateCorpuseCommand()
-            {
-                Name = createCorpuseRequest.Name,
-                Address = createCorpuseRequest.Address,
-                FloorsNumber = createCorpuseRequest.FloorsNumber,
-            };
-            CommandResult commandResult = await _createCorpuseCommandHandler.HandleAsync( createCorpuseCommand );
-
-            if ( commandResult.ValidationResult.IsFail )
-            {
-                return BadRequest( commandResult );
-            }       
-            return Ok( commandResult );
-        }
-
         [HttpDelete( "{corpuseId}" )]
-        public async Task<IActionResult> UpdateCorpuse( [FromRoute] int corpuseId )
+        public async Task<IActionResult> DeleteCorpuse( [FromRoute] int corpuseId )
         {
             DeleteCorpuseCommand deleteCorpuseCommand = new DeleteCorpuseCommand()
             {

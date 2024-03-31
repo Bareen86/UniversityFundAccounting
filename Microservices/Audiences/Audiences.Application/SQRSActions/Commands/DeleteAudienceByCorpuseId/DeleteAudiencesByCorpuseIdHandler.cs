@@ -5,15 +5,15 @@ using Audiences.Domain.Repositories;
 
 namespace Audiences.Application.SQRSActions.Commands.DeleteAudienceByCorpuseId
 {
-    public class DeleteAudienceByCorpuseIdHandler : ICommandHandler<DeleteAudienceByCorpuseIdCommand>
+    public class DeleteAudienceByCorpuseIdHandler : ICommandHandler<DeleteAudiencesByCorpuseIdCommand>
     {
         private readonly IAudienceRepository _audienceRepository;
-        private readonly IAsyncValidator<DeleteAudienceByCorpuseIdCommand> _deleteAudienceByCorpuseIdCommandValidator;
+        private readonly IAsyncValidator<DeleteAudiencesByCorpuseIdCommand> _deleteAudienceByCorpuseIdCommandValidator;
         private readonly IUnitOfWork _unitOfWork;
 
         public DeleteAudienceByCorpuseIdHandler(
             IAudienceRepository audienceRepository,
-            IAsyncValidator<DeleteAudienceByCorpuseIdCommand> validator,
+            IAsyncValidator<DeleteAudiencesByCorpuseIdCommand> validator,
             IUnitOfWork unitOfWork )
         {
             _audienceRepository = audienceRepository;
@@ -21,7 +21,7 @@ namespace Audiences.Application.SQRSActions.Commands.DeleteAudienceByCorpuseId
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CommandResult> HandleAsync( DeleteAudienceByCorpuseIdCommand command )
+        public async Task<CommandResult> HandleAsync( DeleteAudiencesByCorpuseIdCommand command )
         {
             ValidationResult validationResult = await _deleteAudienceByCorpuseIdCommandValidator.ValidationAsync( command );
             if ( !validationResult.IsFail )

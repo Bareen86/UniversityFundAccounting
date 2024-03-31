@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityFundAccounting.ApiGateway", "UniversityFundAccounting.ApiGateway\UniversityFundAccounting.ApiGateway.csproj", "{21CA2581-BA55-46E3-A19D-0DC0A5D7176C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{ABF7CDBA-3AD6-4562-A315-24BFCB697B41}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Audiences", "Audiences", "{F71F3935-A988-45D5-9A0E-903C0269F7A4}"
@@ -18,9 +16,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audiences.Infrastructure", "Microservices\Audiences\Audiences.Infrastructure\Audiences.Infrastructure.csproj", "{32CC8424-89D0-4372-9367-2CF8C19891A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Corpuses", "Corpuses", "{731E7763-38A9-4DD5-8991-256509906653}"
-	ProjectSection(SolutionItems) = preProject
-		Microservices\Corpuses\Corpuses.Application\Corpuses.Application.csproj = Microservices\Corpuses\Corpuses.Application\Corpuses.Application.csproj
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corpuses.Api", "Microservices\Corpuses\Corpuses.Api\Corpuses.Api.csproj", "{16CA7D5C-4097-4496-A66C-8FB9D1B0E1C9}"
 EndProject
@@ -28,16 +23,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corpuses.Domain", "Microser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corpuses.Infrastructure", "Microservices\Corpuses\Corpuses.Infrastructure\Corpuses.Infrastructure.csproj", "{663EADBB-74BA-42BF-9BF1-08C12C99E8B4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Corpuses.Application", "Microservices\Corpuses\Corpuses.Application\Corpuses.Application.csproj", "{BBCF42BA-3C9F-4740-A5C7-24463752E8CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityFundAccounting.ApiGateway", "UniversityFundAccounting.ApiGateway\UniversityFundAccounting.ApiGateway.csproj", "{A14B3063-52B1-41CF-BABA-C1CF56F5FD12}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{89B2CCAE-2BAD-4DC5-9CC4-711F3037C3BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{21CA2581-BA55-46E3-A19D-0DC0A5D7176C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{21CA2581-BA55-46E3-A19D-0DC0A5D7176C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{21CA2581-BA55-46E3-A19D-0DC0A5D7176C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{21CA2581-BA55-46E3-A19D-0DC0A5D7176C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD57E659-0AC4-4F78-800B-D555D5B03674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD57E659-0AC4-4F78-800B-D555D5B03674}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD57E659-0AC4-4F78-800B-D555D5B03674}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -66,6 +63,18 @@ Global
 		{663EADBB-74BA-42BF-9BF1-08C12C99E8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{663EADBB-74BA-42BF-9BF1-08C12C99E8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{663EADBB-74BA-42BF-9BF1-08C12C99E8B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBCF42BA-3C9F-4740-A5C7-24463752E8CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBCF42BA-3C9F-4740-A5C7-24463752E8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBCF42BA-3C9F-4740-A5C7-24463752E8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBCF42BA-3C9F-4740-A5C7-24463752E8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14B3063-52B1-41CF-BABA-C1CF56F5FD12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14B3063-52B1-41CF-BABA-C1CF56F5FD12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14B3063-52B1-41CF-BABA-C1CF56F5FD12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14B3063-52B1-41CF-BABA-C1CF56F5FD12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89B2CCAE-2BAD-4DC5-9CC4-711F3037C3BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89B2CCAE-2BAD-4DC5-9CC4-711F3037C3BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89B2CCAE-2BAD-4DC5-9CC4-711F3037C3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89B2CCAE-2BAD-4DC5-9CC4-711F3037C3BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +89,7 @@ Global
 		{16CA7D5C-4097-4496-A66C-8FB9D1B0E1C9} = {731E7763-38A9-4DD5-8991-256509906653}
 		{250C423F-BA6D-443C-8A04-01DBC68B12F5} = {731E7763-38A9-4DD5-8991-256509906653}
 		{663EADBB-74BA-42BF-9BF1-08C12C99E8B4} = {731E7763-38A9-4DD5-8991-256509906653}
+		{BBCF42BA-3C9F-4740-A5C7-24463752E8CD} = {731E7763-38A9-4DD5-8991-256509906653}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {62B911DF-0042-4315-8823-D08135F36BFA}

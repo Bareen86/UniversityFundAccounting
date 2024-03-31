@@ -1,0 +1,50 @@
+/api/audiences PostAudience
+{
+  "corpuseId": 1,
+  "name": "Крутая аудитория",
+  "audienceType": 2,
+  "capacity": 20,
+  "floor": 2,
+  "audienceNumber": 257
+}
+
+/api/audiences/1 GetAudiencesByCorpuseId
+
+/api/audiences/1 DeleteAudienceById
+
+/api/audiences/1 UpdateAudienceById
+{
+  "corpuseId": 1,
+  "name": "НеЕгор",
+  "audienceType": 2,
+  "capacity": 20,
+  "floor": 2,
+  "audienceNumber": 256
+}
+
+/api/audiences/corpuse/3 DeleteAudienceByCorpuseId
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/api/corpuses CreateCorpuse
+{
+  "name": "string",
+  "address": "string",
+  "floorsNumber": 5
+}
+
+/api/corpuses/1 GetCorpuse
+
+/api/corpuses/3 DeleteCorpuse
+
+/api/corpuses/1
+{
+  "name": "string",
+  "address": "string",
+  "floorsNumber": 4
+}
+
+
+

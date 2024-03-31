@@ -1,0 +1,80 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/audiences",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "audiencesapi",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/audiences",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/audiences/{audienceId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "audiencesapi",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/audiences/{audienceId}",
+      "UpstreamHttpMethod": [ "DELETE", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/audiences/{corpuseId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "audiencesapi",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/audiences/{corpuseId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/audiences/corpuse/{corpuseId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "audiencesapi",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/audiences/corpuse/{corpuseId}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/corpuses",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "corpusesapi",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/corpuses/",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/corpuses/{corpuseId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "corpusesapi",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/corpuses/{corpuseId}",
+      "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ]
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5000"
+  }
+}

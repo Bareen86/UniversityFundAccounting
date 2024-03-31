@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  apigateway:
+    image: ${DOCKER_REGISTRY-}universityfundaccountingapigateway
+    build:
+      context: .
+      dockerfile: UniversityFundAccounting.ApiGateway/Dockerfile
+    ports:
+       - 5000:5000
+  audiencesapi:
+     image: ${DOCKER_REGISTRY-}audiencesapi
+     build: 
+       context: .
+       dockerfile: Microservices/Audiences/Audiences.Api/Dockerfile
+     ports:
+       - 7001:80
+  corpusesapi:
+     image: ${DOCKER_REGISTRY-}corpusesapi
+     build: 
+       context: .
+       dockerfile: Microservices/Corpuses/Corpuses.Api/Dockerfile
+     ports:
+       - 7002:80
+

@@ -19,14 +19,14 @@ namespace Audiences.Api.Controllers
         private readonly ICommandHandler<CreateAudienceCommand> _createAudienceCommandHandler;
         private readonly ICommandHandler<UpdateAudienceCommand> _updateAudienceCommandHandler;
         private readonly ICommandHandler<DeleteAudienceCommand> _deleteAudienceCommandHandler;
-        private readonly ICommandHandler<DeleteAudienceByCorpuseIdCommand> _deleteAudiencesByCorpuseIdHandler;
+        private readonly ICommandHandler<DeleteAudiencesByCorpuseIdCommand> _deleteAudiencesByCorpuseIdHandler;
         private readonly IQueryHandler<IReadOnlyList<GetAudiencesByCorpuseIdQueryDto>, GetAudiencesByCorpuseIdQuery> _getAudiencesByCorpuseIdQueryHandler;
 
         public AudiencesController(
             ICommandHandler<CreateAudienceCommand> createAudienceCommandHandler,
             ICommandHandler<UpdateAudienceCommand> updateAudienceCommandHandler,
             ICommandHandler<DeleteAudienceCommand> deleteAudienceCommandHandler,
-            ICommandHandler<DeleteAudienceByCorpuseIdCommand> deleteAudiencesByCorpuseIdHandler,
+            ICommandHandler<DeleteAudiencesByCorpuseIdCommand> deleteAudiencesByCorpuseIdHandler,
             IQueryHandler<IReadOnlyList<GetAudiencesByCorpuseIdQueryDto>, GetAudiencesByCorpuseIdQuery> getAudiencesByCorpuseIdQueryHandler )
         {
             _createAudienceCommandHandler = createAudienceCommandHandler;
@@ -36,24 +36,9 @@ namespace Audiences.Api.Controllers
             _getAudiencesByCorpuseIdQueryHandler = getAudiencesByCorpuseIdQueryHandler;
         }
 
-        [HttpGet( "{corpuseId}" )]
-        public async Task<IActionResult> GetAudiences( [FromRoute] int corpuseId )
-        {
-            GetAudiencesByCorpuseIdQuery getAudiencesByCorpuseIdQuery = new GetAudiencesByCorpuseIdQuery()
-            {
-                Id = corpuseId
-            };
-            QueryResult<IReadOnlyList<GetAudiencesByCorpuseIdQueryDto>> queryResult = await _getAudiencesByCorpuseIdQueryHandler.HandleAsync( getAudiencesByCorpuseIdQuery );
-
-            if ( queryResult.ValidationResult.IsFail )
-            {
-                return BadRequest( queryResult );
-            }
-            return Ok(queryResult);
-        }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAudience( [FromBody] CreateAudienceDto createAudienceDto)
+        public async Task<IActionResult> CreateAudience( [FromBody] CreateAudienceDto createAudienceDto )
         {
             CreateAudienceCommand createAudienceCommand = new CreateAudienceCommand()
             {
@@ -62,15 +47,15 @@ namespace Audiences.Api.Controllers
                 AudienceType = createAudienceDto.AudienceType,
                 Capacity = createAudienceDto.Capacity,
                 Floor = createAudienceDto.Floor,
-                AudienceNumber  = createAudienceDto.AudienceNumber,
+                AudienceNumber = createAudienceDto.AudienceNumber,
             };
-            CommandResult commandResult = await _createAudienceCommandHandler.HandleAsync(createAudienceCommand);
+            CommandResult commandResult = await _createAudienceCommandHandler.HandleAsync( createAudienceCommand );
 
             if ( commandResult.ValidationResult.IsFail )
             {
                 return BadRequest( commandResult );
-            }   
-            return Ok(commandResult);
+            }
+            return Ok( commandResult );
         }
 
         [HttpDelete("{audienceId}")]
@@ -89,38 +74,54 @@ namespace Audiences.Api.Controllers
             return Ok(commandResult);
         }
 
+        [HttpPut( "{audienceId}" )]
+        public async Task<IActionResult> UpdateAudience( [FromRoute] int audienceId, [FromBody] UpdateAudienceDto updateAudienceDto )
+        {
+            UpdateAudienceCommand updateAudienceCommand = new UpdateAudienceCommand()
+            {
+                Id = audienceId,
+                CorpuseId = updateAudienceDto.CorpuseId,
+                Name = updateAudienceDto.Name,
+                AudienceType = updateAudienceDto.AudienceType,
+                Capacity = updateAudienceDto.Capacity,
+                Floor = updateAudienceDto.Floor,
+                AudienceNumber = updateAudienceDto.AudienceNumber
+            };
+            CommandResult commandResult = await _updateAudienceCommandHandler.HandleAsync( updateAudienceCommand );
+
+            if ( commandResult.ValidationResult.IsFail )
+            {
+                return BadRequest( commandResult );
+            }
+            return Ok( commandResult );
+        }
+
+        [HttpGet( "{corpuseId}" )]
+        public async Task<IActionResult> GetAudiences( [FromRoute] int corpuseId )
+        {
+            GetAudiencesByCorpuseIdQuery getAudiencesByCorpuseIdQuery = new GetAudiencesByCorpuseIdQuery()
+            {
+                Id = corpuseId
+            };
+            QueryResult<IReadOnlyList<GetAudiencesByCorpuseIdQueryDto>> queryResult = await _getAudiencesByCorpuseIdQueryHandler.HandleAsync( getAudiencesByCorpuseIdQuery );
+
+            if ( queryResult.ValidationResult.IsFail )
+            {
+                return BadRequest( queryResult );
+            }
+            return Ok( queryResult );
+        }
+
         [HttpDelete( "corpuse/{corpuseId}" )]
         public async Task<IActionResult> DeleteAudienceByCorpuseId( [FromRoute] int corpuseId )
         {
-            DeleteAudienceByCorpuseIdCommand deleteAudienceByCorpuseIdCommand = new DeleteAudienceByCorpuseIdCommand()
+            DeleteAudiencesByCorpuseIdCommand deleteAudienceByCorpuseIdCommand = new DeleteAudiencesByCorpuseIdCommand()
             {
                 Id = corpuseId
             };
             CommandResult commandResult = await _deleteAudiencesByCorpuseIdHandler.HandleAsync(deleteAudienceByCorpuseIdCommand);
 
             if ( commandResult.ValidationResult.IsFail )
-            {
-                return BadRequest( commandResult );
-            }
-            return Ok(commandResult);
-        }
-
-        [HttpPut("{audienceId}")]
-        public async Task<IActionResult> UpdateAudience( [FromRoute] int audienceId, [FromBody] UpdateAudienceDto updateAudienceDto)
-        {
-            UpdateAudienceCommand updateAudienceCommand = new UpdateAudienceCommand()
-            {
-                Id = audienceId,
-                CorpuseId= updateAudienceDto.CorpuseId,
-                Name = updateAudienceDto.Name,
-                AudienceType= updateAudienceDto.AudienceType,
-                Capacity = updateAudienceDto.Capacity,
-                Floor = updateAudienceDto.Floor,
-                AudienceNumber = updateAudienceDto.AudienceNumber
-            };
-            CommandResult commandResult = await _updateAudienceCommandHandler.HandleAsync(updateAudienceCommand);
-
-            if( commandResult.ValidationResult.IsFail )
             {
                 return BadRequest( commandResult );
             }

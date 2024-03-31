@@ -18,14 +18,14 @@ namespace Audiences.Application
             services.AddScoped<ICommandHandler<CreateAudienceCommand>, CreateAudienceHandler>();
             services.AddScoped<ICommandHandler<DeleteAudienceCommand>, DeleteAudienceHandler>();
             services.AddScoped<ICommandHandler<UpdateAudienceCommand>, UpdateAudienceHandler>();
-            services.AddScoped<ICommandHandler<DeleteAudienceByCorpuseIdCommand>, DeleteAudienceByCorpuseIdHandler>();
+            services.AddScoped<ICommandHandler<DeleteAudiencesByCorpuseIdCommand>, DeleteAudienceByCorpuseIdHandler>();
 
             services.AddScoped<IQueryHandler<GetAudienceByIdQueryDto, GetAudienceByIdQuery>, GetAudienceByIdHandler>();
             services.AddScoped<IQueryHandler<IReadOnlyList<GetAudiencesByCorpuseIdQueryDto>, GetAudiencesByCorpuseIdQuery>, GetAudiencesByCorpuseIdQueryHandler>();
 
             services.AddScoped<IAsyncValidator<CreateAudienceCommand>, CreateAudienceValidator>();
             services.AddScoped<IAsyncValidator<DeleteAudienceCommand>, DeleteAudienceValidator>();
-            services.AddScoped<IAsyncValidator<DeleteAudienceByCorpuseIdCommand>, DeleteAudienceByCorpuseIdValidator>();
+            services.AddScoped<IAsyncValidator<DeleteAudiencesByCorpuseIdCommand>, DeleteAudiencesByCorpuseIdValidator>();
             services.AddScoped<IAsyncValidator<UpdateAudienceCommand>, UpdateAudienceValidator>();
 
             services.AddScoped<IAsyncValidator<GetAudiencesByCorpuseIdQuery>, GetAudiencesByCorpuseIdQueryValidator>();

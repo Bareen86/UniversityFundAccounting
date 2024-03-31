@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,15 +14,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
+    <PackageReference Include="Ocelot" Version="18.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Audiences.Api\Audiences.Api.csproj" />
-    <ProjectReference Include="..\Audiences.Infrastructure\Audiences.Infrastructure.csproj" />
-    <ProjectReference Include="..\Corpuses.Api\Corpuses.Api.csproj" />
-    <ProjectReference Include="..\Corpuses.Infrastructure\Corpuses.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
