@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "audiencesapi",
-          "Port": 7001
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/audiences",
@@ -18,7 +18,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "audiencesapi",
-          "Port": 7001
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/audiences/{audienceId}",
@@ -30,7 +30,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "audiencesapi",
-          "Port": 7001
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/audiences/{corpuseId}",
@@ -42,7 +42,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "audiencesapi",
-          "Port": 7001
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/audiences/corpuse/{corpuseId}",
@@ -54,7 +54,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "corpusesapi",
-          "Port": 7002
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/corpuses/",
@@ -66,7 +66,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "corpusesapi",
-          "Port": 7002
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/corpuses/{corpuseId}",
@@ -74,7 +74,5 @@
     }
 
   ],
-  "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5000"
-  }
+  "GlobalConfiguration": {}
 }
