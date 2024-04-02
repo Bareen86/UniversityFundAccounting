@@ -3,6 +3,7 @@ using Audiences.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Audiences.Infrastructure.Foundation;
 using MassTransit;
+using Audiences.Api.Consumers;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -23,6 +24,26 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAudiencesAppication();
 builder.Services.AddAudienceInfrastructire();
+
+builder.Services.AddMassTransit( x =>
+{
+    x.AddConsumer<AudienceConsumer>();
+
+    x.UsingRabbitMq( ( context, cfg ) =>
+    {
+        cfg.Host( "rabbitmq://rabbitmq", c =>
+        {
+            c.Username( "guest" );
+            c.Password( "guest" );
+        } );
+        cfg.ReceiveEndpoint( "audienceQueue", ep =>
+        {
+            ep.ConfigureConsumer<AudienceConsumer>( context );
+        } );
+        cfg.ClearSerialization();
+        cfg.UseRawJsonSerializer();
+    } );
+} );
 
 var app = builder.Build();
 

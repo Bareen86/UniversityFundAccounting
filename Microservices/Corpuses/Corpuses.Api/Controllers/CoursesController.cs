@@ -1,5 +1,4 @@
-﻿using Corpuses.Api.Consumers;
-using Corpuses.Api.Dtos;
+﻿using Corpuses.Api.Dtos;
 using Corpuses.Application.CQRSActions.Commands.CreateCorpuse;
 using Corpuses.Application.CQRSActions.Commands.DeleteCorpuse.DeleteCorpuseCommand;
 using Corpuses.Application.CQRSActions.Commands.UpdateCorpuse;
@@ -10,6 +9,7 @@ using Corpuses.Application.CQRSInterfaces;
 using Corpuses.Application.Results;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using UniversityFundAccounting.Shared;
 
 namespace Corpuses.Api.Controllers
 {
@@ -22,7 +22,7 @@ namespace Corpuses.Api.Controllers
         private readonly ICommandHandler<DeleteCorpuseCommand> _deleleCorpuseCommandHandler;
         private readonly IQueryHandler<GetCorpuseQueryDto, GetCorpuseQuery> _getCorpuseQueryHandler;
         private readonly IQueryHandler<IReadOnlyList<GetCorpusesQueryDto>, GetCorpusesQuery> _getCorpusesQueryHandler;
-        private readonly IPublishEndpoint _publishEndpoint;
+        private readonly IBus _bus;
 
         public CoursesController(
             ICommandHandler<CreateCorpuseCommand> createCorpuseCommandHandler,
@@ -30,14 +30,14 @@ namespace Corpuses.Api.Controllers
             ICommandHandler<DeleteCorpuseCommand> deleleCorpuseCommandHandler,
             IQueryHandler<GetCorpuseQueryDto, GetCorpuseQuery> getCorpuseQueryHandler,
             IQueryHandler<IReadOnlyList<GetCorpusesQueryDto>, GetCorpusesQuery> getCorpusesQueryHandler,
-            IPublishEndpoint publishEndpoint)
+            IBus bus )
         {
             _createCorpuseCommandHandler = createCorpuseCommandHandler;
             _updateCorpuseCommandHandler = updateCorpuseCommandHandler;
             _deleleCorpuseCommandHandler = deleleCorpuseCommandHandler;
             _getCorpuseQueryHandler = getCorpuseQueryHandler;
             _getCorpusesQueryHandler = getCorpusesQueryHandler;
-            _publishEndpoint = publishEndpoint;
+            _bus = bus;
         }
 
         public async Task<IActionResult> CreateCorpuse( [FromBody] CreateCorpuseDto createCorpuseRequest )
@@ -104,7 +104,9 @@ namespace Corpuses.Api.Controllers
             {
                 Id = corpuseId
             };
-            await _publishEndpoint.Publish( deleteByCorpuseIdDto );
+            Uri uri = new Uri( "rabbitmq://rabbitmq/audienceQueue" );
+            var endPoint = await _bus.GetSendEndpoint( uri );
+            await endPoint.Send( deleteByCorpuseIdDto );
             return Ok( commandResult );
         }
 

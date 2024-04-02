@@ -19,20 +19,17 @@ namespace Audiences.Api.Controllers
         private readonly ICommandHandler<CreateAudienceCommand> _createAudienceCommandHandler;
         private readonly ICommandHandler<UpdateAudienceCommand> _updateAudienceCommandHandler;
         private readonly ICommandHandler<DeleteAudienceCommand> _deleteAudienceCommandHandler;
-        private readonly ICommandHandler<DeleteAudiencesByCorpuseIdCommand> _deleteAudiencesByCorpuseIdHandler;
         private readonly IQueryHandler<IReadOnlyList<GetAudiencesByCorpuseIdQueryDto>, GetAudiencesByCorpuseIdQuery> _getAudiencesByCorpuseIdQueryHandler;
 
         public AudiencesController(
             ICommandHandler<CreateAudienceCommand> createAudienceCommandHandler,
             ICommandHandler<UpdateAudienceCommand> updateAudienceCommandHandler,
             ICommandHandler<DeleteAudienceCommand> deleteAudienceCommandHandler,
-            ICommandHandler<DeleteAudiencesByCorpuseIdCommand> deleteAudiencesByCorpuseIdHandler,
             IQueryHandler<IReadOnlyList<GetAudiencesByCorpuseIdQueryDto>, GetAudiencesByCorpuseIdQuery> getAudiencesByCorpuseIdQueryHandler )
         {
             _createAudienceCommandHandler = createAudienceCommandHandler;
             _updateAudienceCommandHandler = updateAudienceCommandHandler;
             _deleteAudienceCommandHandler = deleteAudienceCommandHandler;
-            _deleteAudiencesByCorpuseIdHandler = deleteAudiencesByCorpuseIdHandler;
             _getAudiencesByCorpuseIdQueryHandler = getAudiencesByCorpuseIdQueryHandler;
         }
 
@@ -110,22 +107,6 @@ namespace Audiences.Api.Controllers
                 return BadRequest( queryResult );
             }
             return Ok( queryResult );
-        }
-
-        [HttpDelete( "corpuse/{corpuseId}" )]
-        public async Task<IActionResult> DeleteAudienceByCorpuseId( [FromRoute] int corpuseId )
-        {
-            DeleteAudiencesByCorpuseIdCommand deleteAudienceByCorpuseIdCommand = new DeleteAudiencesByCorpuseIdCommand()
-            {
-                Id = corpuseId
-            };
-            CommandResult commandResult = await _deleteAudiencesByCorpuseIdHandler.HandleAsync(deleteAudienceByCorpuseIdCommand);
-
-            if ( commandResult.ValidationResult.IsFail )
-            {
-                return BadRequest( commandResult );
-            }
-            return Ok(commandResult);
         }
     }
 }

@@ -1,9 +1,9 @@
-using Corpuses.Api.Consumers;
 using Corpuses.Application;
 using Corpuses.Infrastructure;
 using Corpuses.Infrastructure.Foundation;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using UniversityFundAccounting.Shared;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -27,8 +27,6 @@ builder.Services.AddCorpusesInfrastructure();
 
 builder.Services.AddMassTransit( x =>
 {
-    x.AddConsumer<DeleteByCorpuseIdConsumer>();
-
     x.UsingRabbitMq( ( context, cfg ) =>
     {
         cfg.Host( "rabbitmq://rabbitmq", c =>
@@ -36,15 +34,8 @@ builder.Services.AddMassTransit( x =>
             c.Username( "guest" );
             c.Password( "guest" );
         } );
-
-        cfg.ReceiveEndpoint( "DeleteByCorpuseIdQueue", e =>
-        {
-            e.ConfigureConsumer<DeleteByCorpuseIdConsumer>( context );
-        } );
-
         cfg.ClearSerialization();
         cfg.UseRawJsonSerializer();
-        cfg.ConfigureEndpoints( context );
     } );
 } );
 
