@@ -1,4 +1,5 @@
-﻿using Corpuses.Api.Dtos;
+﻿using Corpuses.Api.Consumers;
+using Corpuses.Api.Dtos;
 using Corpuses.Application.CQRSActions.Commands.CreateCorpuse;
 using Corpuses.Application.CQRSActions.Commands.DeleteCorpuse.DeleteCorpuseCommand;
 using Corpuses.Application.CQRSActions.Commands.UpdateCorpuse;
@@ -7,6 +8,7 @@ using Corpuses.Application.CQRSActions.Queries.GetCorpuse;
 using Corpuses.Application.CQRSActions.Queries.GetCorpuses;
 using Corpuses.Application.CQRSInterfaces;
 using Corpuses.Application.Results;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Corpuses.Api.Controllers
@@ -20,23 +22,24 @@ namespace Corpuses.Api.Controllers
         private readonly ICommandHandler<DeleteCorpuseCommand> _deleleCorpuseCommandHandler;
         private readonly IQueryHandler<GetCorpuseQueryDto, GetCorpuseQuery> _getCorpuseQueryHandler;
         private readonly IQueryHandler<IReadOnlyList<GetCorpusesQueryDto>, GetCorpusesQuery> _getCorpusesQueryHandler;
+        private readonly IPublishEndpoint _publishEndpoint;
 
         public CoursesController(
             ICommandHandler<CreateCorpuseCommand> createCorpuseCommandHandler,
             ICommandHandler<UpdateCorpuseCommand> updateCorpuseCommandHandler,
             ICommandHandler<DeleteCorpuseCommand> deleleCorpuseCommandHandler,
             IQueryHandler<GetCorpuseQueryDto, GetCorpuseQuery> getCorpuseQueryHandler,
-            IQueryHandler<IReadOnlyList<GetCorpusesQueryDto>, GetCorpusesQuery> getCorpusesQueryHandler )
+            IQueryHandler<IReadOnlyList<GetCorpusesQueryDto>, GetCorpusesQuery> getCorpusesQueryHandler,
+            IPublishEndpoint publishEndpoint)
         {
             _createCorpuseCommandHandler = createCorpuseCommandHandler;
             _updateCorpuseCommandHandler = updateCorpuseCommandHandler;
             _deleleCorpuseCommandHandler = deleleCorpuseCommandHandler;
             _getCorpuseQueryHandler = getCorpuseQueryHandler;
             _getCorpusesQueryHandler = getCorpusesQueryHandler;
+            _publishEndpoint = publishEndpoint;
         }
 
-
-        [HttpPost]
         public async Task<IActionResult> CreateCorpuse( [FromBody] CreateCorpuseDto createCorpuseRequest )
         {
             CreateCorpuseCommand createCorpuseCommand = new CreateCorpuseCommand()
@@ -96,6 +99,12 @@ namespace Corpuses.Api.Controllers
             {
                 return BadRequest( commandResult );
             }
+
+            DeleteByCorpuseIdDto deleteByCorpuseIdDto = new DeleteByCorpuseIdDto()
+            {
+                Id = corpuseId
+            };
+            await _publishEndpoint.Publish( deleteByCorpuseIdDto );
             return Ok( commandResult );
         }
 

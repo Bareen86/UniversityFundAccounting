@@ -1,7 +1,9 @@
+using Corpuses.Api.Consumers;
 using Corpuses.Application;
 using Corpuses.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using Corpuses.Infrastructure.Foundation;
+using MassTransit;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -22,6 +24,29 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCorpusesBindings();
 builder.Services.AddCorpusesInfrastructure();
+
+builder.Services.AddMassTransit( x =>
+{
+    x.AddConsumer<DeleteByCorpuseIdConsumer>();
+
+    x.UsingRabbitMq( ( context, cfg ) =>
+    {
+        cfg.Host( "rabbitmq://rabbitmq", c =>
+        {
+            c.Username( "guest" );
+            c.Password( "guest" );
+        } );
+
+        cfg.ReceiveEndpoint( "DeleteByCorpuseIdQueue", e =>
+        {
+            e.ConfigureConsumer<DeleteByCorpuseIdConsumer>( context );
+        } );
+
+        cfg.ClearSerialization();
+        cfg.UseRawJsonSerializer();
+        cfg.ConfigureEndpoints( context );
+    } );
+} );
 
 var app = builder.Build();
 

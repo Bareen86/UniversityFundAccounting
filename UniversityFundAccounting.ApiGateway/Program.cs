@@ -11,6 +11,15 @@ builder.Services.AddOcelot( configuration );
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors( options =>
+{
+    options.AddPolicy( "CorsPolicy",
+        builder => builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials() );
+} );
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

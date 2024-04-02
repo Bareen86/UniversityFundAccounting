@@ -13,7 +13,7 @@ namespace Corpuses.Infrastructure.Data
         {
         }
 
-        public Task<bool> ContainsAsync( Expression<Func<Corpuse, bool>> predicate )
+        public async Task<bool> ContainsAsync( Expression<Func<Corpuse, bool>> predicate )
         {
             return await Entities.Where( predicate ).FirstOrDefaultAsync() != null;
         }

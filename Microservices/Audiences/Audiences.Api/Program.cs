@@ -2,6 +2,7 @@ using Audiences.Application;
 using Audiences.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Audiences.Infrastructure.Foundation;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder( args );
 
