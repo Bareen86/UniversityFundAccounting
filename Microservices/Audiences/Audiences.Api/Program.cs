@@ -1,9 +1,9 @@
+using Audiences.Api.Consumers;
 using Audiences.Application;
 using Audiences.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using Audiences.Infrastructure.Foundation;
 using MassTransit;
-using Audiences.Api.Consumers;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -44,6 +44,17 @@ builder.Services.AddMassTransit( x =>
         cfg.UseRawJsonSerializer();
     } );
 } );
+
+using ( var scope = builder.Services.BuildServiceProvider().CreateScope() )
+{
+    using ( var dbContext = scope.ServiceProvider.GetRequiredService<AudiencesDbContext>() )
+    {
+        if ( dbContext.Database.GetPendingMigrations().Any() )
+        {
+            dbContext.Database.Migrate();
+        }
+    }
+}
 
 var app = builder.Build();
 

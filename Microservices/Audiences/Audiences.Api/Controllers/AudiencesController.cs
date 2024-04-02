@@ -2,11 +2,9 @@
 using Audiences.Application.Results;
 using Audiences.Application.SQRSActions.Commands.CreateAudience;
 using Audiences.Application.SQRSActions.Commands.DeleteAudience;
-using Audiences.Application.SQRSActions.Commands.DeleteAudienceByCorpuseId;
 using Audiences.Application.SQRSActions.Commands.UpdateAudience;
 using Audiences.Application.SQRSActions.DTOs;
 using Audiences.Application.SQRSActions.Queries.GetAudienceByCorpuseId;
-using Audiences.Application.SQRSActions.Queries.GetAudienceById;
 using Audiences.Application.SQRSInterfaces;
 using Microsoft.AspNetCore.Mvc;
 

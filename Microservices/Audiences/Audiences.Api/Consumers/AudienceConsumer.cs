@@ -1,7 +1,6 @@
 ﻿using Audiences.Application.Results;
 using Audiences.Application.SQRSActions.Commands.DeleteAudienceByCorpuseId;
 using Audiences.Application.SQRSInterfaces;
-using Audiences.Domain.Repositories;
 using MassTransit;
 using UniversityFundAccounting.Shared;
 

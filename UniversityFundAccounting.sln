@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityFundAccounting.Ap
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{89B2CCAE-2BAD-4DC5-9CC4-711F3037C3BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversityFundAccounting.Shared", "..\UniversityFundAccounting.Shared\UniversityFundAccounting.Shared.csproj", "{A1E47B36-FE0E-4963-A987-0662AB75D8A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversityFundAccounting.Shared", "UniversityFundAccounting.Shared\UniversityFundAccounting.Shared.csproj", "{9E44F853-ACAB-4FA7-9F6F-D66704C9E0DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,10 +77,10 @@ Global
 		{89B2CCAE-2BAD-4DC5-9CC4-711F3037C3BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89B2CCAE-2BAD-4DC5-9CC4-711F3037C3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89B2CCAE-2BAD-4DC5-9CC4-711F3037C3BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1E47B36-FE0E-4963-A987-0662AB75D8A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1E47B36-FE0E-4963-A987-0662AB75D8A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1E47B36-FE0E-4963-A987-0662AB75D8A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1E47B36-FE0E-4963-A987-0662AB75D8A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E44F853-ACAB-4FA7-9F6F-D66704C9E0DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E44F853-ACAB-4FA7-9F6F-D66704C9E0DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E44F853-ACAB-4FA7-9F6F-D66704C9E0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E44F853-ACAB-4FA7-9F6F-D66704C9E0DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

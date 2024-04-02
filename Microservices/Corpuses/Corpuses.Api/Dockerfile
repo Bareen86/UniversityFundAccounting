@@ -9,6 +9,7 @@ WORKDIR /src
 COPY ["Microservices/Corpuses/Corpuses.Api/Corpuses.Api.csproj", "Microservices/Corpuses/Corpuses.Api/"]
 COPY ["Microservices/Corpuses/Corpuses.Domain/Corpuses.Domain.csproj", "Microservices/Corpuses/Corpuses.Domain/"]
 COPY ["Microservices/Corpuses/Corpuses.Infrastructure/Corpuses.Infrastructure.csproj", "Microservices/Corpuses/Corpuses.Infrastructure/"]
+COPY ["UniversityFundAccounting.Shared/UniversityFundAccounting.Shared.csproj", "RabbitMQShared/"]
 RUN dotnet restore "Microservices/Corpuses/Corpuses.Api/Corpuses.Api.csproj"
 COPY . .
 WORKDIR "/src/Microservices/Corpuses/Corpuses.Api"

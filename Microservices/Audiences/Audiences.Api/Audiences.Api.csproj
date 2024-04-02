@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\UniversityFundAccounting.Shared\UniversityFundAccounting.Shared.csproj" />
+    <ProjectReference Include="..\..\..\UniversityFundAccounting.Shared\UniversityFundAccounting.Shared.csproj" />
     <ProjectReference Include="..\Audiences.Application\Audiences.Application.csproj" />
     <ProjectReference Include="..\Audiences.Domain\Audiences.Domain.csproj" />
     <ProjectReference Include="..\Audiences.Infrastructure\Audiences.Infrastructure.csproj" />

@@ -3,7 +3,6 @@ using Corpuses.Infrastructure;
 using Corpuses.Infrastructure.Foundation;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using UniversityFundAccounting.Shared;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -38,6 +37,17 @@ builder.Services.AddMassTransit( x =>
         cfg.UseRawJsonSerializer();
     } );
 } );
+
+using ( var scope = builder.Services.BuildServiceProvider().CreateScope() )
+{
+    using ( var dbContext = scope.ServiceProvider.GetRequiredService<CorpusesDbContext>() )
+    {
+        if ( dbContext.Database.GetPendingMigrations().Any() )
+        {
+            dbContext.Database.Migrate();
+        }
+    }
+}
 
 var app = builder.Build();
 

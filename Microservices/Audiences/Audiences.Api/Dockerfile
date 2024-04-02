@@ -10,6 +10,7 @@ COPY ["Microservices/Audiences/Audiences.Api/Audiences.Api.csproj", "Microservic
 COPY ["Microservices/Audiences/Audiences.Application/Audiences.Application.csproj", "Microservices/Audiences/Audiences.Application/"]
 COPY ["Microservices/Audiences/Audiences.Domain/Audiences.Domain.csproj", "Microservices/Audiences/Audiences.Domain/"]
 COPY ["Microservices/Audiences/Audiences.Infrastructure/Audiences.Infrastructure.csproj", "Microservices/Audiences/Audiences.Infrastructure/"]
+COPY ["UniversityFundAccounting.Shared/UniversityFundAccounting.Shared.csproj", "RabbitMQShared/"]
 RUN dotnet restore "Microservices/Audiences/Audiences.Api/Audiences.Api.csproj"
 COPY . .
 WORKDIR "/src/Microservices/Audiences/Audiences.Api"
