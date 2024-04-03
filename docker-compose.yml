@@ -22,14 +22,12 @@ services:
        dockerfile: UniversityFundAccounting.ApiGateway/Dockerfile
      ports:
         - 5000:80
-     links:
-       - audiencesapi
-       - corpusesapi
-       - rabbitmq
      depends_on:
        - audiencesapi
        - corpusesapi
        - rabbitmq
+       - corpusesdb
+       - audiencesdb
   rabbitmq: 
     image: rabbitmq:management
     container_name: rabbitmq
@@ -37,5 +35,22 @@ services:
       - 5672:5672
       - 15672:15672
     hostname: rabbitmq
-    
+  audiencesdb:
+    image: postgres:11.4
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=Audiences
+    ports:
+      - "5434:5432"
+  corpusesdb:
+    image: postgres:11.4
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=Corpuses
+    ports:
+      - "5435:5432"
 
