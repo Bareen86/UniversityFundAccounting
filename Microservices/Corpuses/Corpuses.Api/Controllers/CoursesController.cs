@@ -65,9 +65,9 @@ namespace Corpuses.Api.Controllers
 
             if ( queryResult.ValidationResult.IsFail )
             {
-                return BadRequest( queryResult );
+                return BadRequest( queryResult.ObjResult );
             }
-            return Ok( queryResult );
+            return Ok( queryResult.ObjResult );
         }
 
         [HttpGet( "{corpuseId}" )]

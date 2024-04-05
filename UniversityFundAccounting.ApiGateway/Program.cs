@@ -11,14 +11,12 @@ builder.Services.AddOcelot( configuration );
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors( options =>
-{
-    options.AddPolicy( "CorsPolicy",
-        builder => builder.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials() );
-} );
+builder.Services.AddCors( options => options.AddPolicy( name: "Frontend",
+    policy =>
+    {
+        policy.WithOrigins( "http://localhost:8080" ).AllowAnyMethod().AllowAnyHeader();
+    }
+    ) );
 
 var app = builder.Build();
 
@@ -28,6 +26,8 @@ if ( app.Environment.IsDevelopment() )
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors( "Frontend" );
 
 await app.UseOcelot();
 app.Run();
