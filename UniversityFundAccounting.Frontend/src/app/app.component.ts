@@ -1,13 +1,13 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CorpuseService } from './Services/corpuse.service';
-import { NgFor, NgIf } from '@angular/common';
-import { ICorpuse } from './Models/ICorpuse';
-import { CorpuseComponent } from './components/corpuse/corpuse.component';
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
-import { AddCorpuseRowComponent } from './components/add-corpuse-row/add-corpuse-row.component';
-import { GetAudiencesQueryResult } from './Models/result-request/audience/GetAudiencesQueryResult';
+import { ICorpuse } from './Models/ICorpuse';
 import { GetCorpusesQueryResult } from './Models/result-request/corpuse/GetCorpusesQueryResult';
+import { CorpuseService } from './Services/corpuse.service';
+import { AddCorpuseRowComponent } from './components/add-corpuse-row/add-corpuse-row.component';
+import { CorpuseComponent } from './components/corpuse/corpuse.component';
+import { AudienceService } from './Services/audience.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ import { GetCorpusesQueryResult } from './Models/result-request/corpuse/GetCorpu
   imports: [RouterOutlet, NgFor, NgIf, CorpuseComponent, ButtonsModule, AddCorpuseRowComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [CorpuseService]
+  providers: [CorpuseService, AudienceService]
 })
 export class AppComponent implements OnInit{
   
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit{
   constructor(private corpuseService : CorpuseService) {}
 
   ngOnInit(): void {
-    this.corpuseService.fetchCorpuses().subscribe((result : GetCorpusesQueryResult) => {
+    this.corpuseService.GetCorpuses().subscribe((result : GetCorpusesQueryResult) => {
       this.corpuses = result.objResult;
     })
   }
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit{
   }
 
   newCorpuseEventHandler(occured : boolean) {
-    this.corpuseService.fetchCorpuses().subscribe((corpuses) => {
+    this.corpuseService.GetCorpuses().subscribe((corpuses) => {
       this.corpuses = corpuses.objResult;
     })
   }

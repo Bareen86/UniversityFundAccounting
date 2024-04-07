@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { InputsModule } from "@progress/kendo-angular-inputs";
 import { FormsModule } from '@angular/forms';
 import { IconsModule } from "@progress/kendo-angular-icons";
-import { CorpuseService } from '../../Services/corpuse.service';
-import { ICreateCorpuse } from '../../Models/command/corpuse/ICreateCorpuse';
-import { IValidationResult } from '../../Models/IValidationResult';
+import { InputsModule } from "@progress/kendo-angular-inputs";
 import { LabelModule } from '@progress/kendo-angular-label';
+import { IValidationResult } from '../../Models/IValidationResult';
+import { ICreateCorpuse } from '../../Models/command/corpuse/ICreateCorpuse';
+import { CorpuseService } from '../../Services/corpuse.service';
 
 @Component({
   selector: 'app-add-corpuse-row',
@@ -20,28 +20,56 @@ export class AddCorpuseRowComponent {
 
   corpuseName = '';
   corpuseAddress = '';
-  corpuseFloorsNumber : number = 0;
+  corpuseFloorsNumber = 1;
   validation : IValidationResult = {
     isFail: false
   };
+  corpuseNameError = '';
+  corpuseAddressError = '';
+  corpuseFloorsNumberError = '';
 
   constructor(private corpuseService : CorpuseService) {}
 
-  private resetParemetres() : void {
-    this.corpuseName = ' ',
-    this.corpuseAddress = ' ',
-    this.corpuseFloorsNumber = 0
+  private ResetParemetres() : void {
+    this.corpuseName = '';
+    this.corpuseAddress = '';
+    this.corpuseFloorsNumber = 1;
+    this.corpuseNameError = '';
+    this.corpuseAddressError = '';
+    this.corpuseFloorsNumberError = ''
   }
 
-  public addCorpuse(corpuse : ICreateCorpuse) : void {
-    this.corpuseService.addCorpuse(corpuse).subscribe(
-      (result : IValidationResult) => {
-        this.validation.isFail = false;
+  private ResetErrors() : void {
+    this.corpuseNameError = '';
+    this.corpuseAddressError = '';
+    this.corpuseFloorsNumberError = ''
+  }
+
+  public AddCorpuse(corpuse : ICreateCorpuse) : void {
+    this.corpuseService.CreateCorpuse(corpuse).subscribe(
+      (data) => {
+        this.validation = data;
         this.newCorpuseEvent.emit(true);
-        this.resetParemetres();
+        this.ResetParemetres();
       },
-      (errormsg : string) => {
-        this.validation.isFail = true;
+      (err) => {
+        this.corpuseService.handleError(err);
+        this.validation = err.error.validationResult;
+        this.ResetErrors();
+        switch(this.validation.error) {
+          case 'Имя корпуса не должно быть пустым':
+            this.corpuseNameError = 'Имя корпуса не должно быть пустым';
+            break;
+          case 'Такой корпус уже есть в указанном адресе':
+            this.corpuseAddressError = 'Такой корпус уже есть в указанном адресе';
+            break;
+          case 'Адресс не должен быть пустым':
+            this.corpuseAddressError = 'Адресс не должен быть пустым';
+            break;
+          case 'В корпусе должен быть минимум 1 этаж':
+            this.corpuseFloorsNumberError = 'В корпусе должен быть минимум 1 этаж';
+            break;
+        }
       }
     )
   }

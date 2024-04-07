@@ -113,6 +113,10 @@ namespace Corpuses.Api.Controllers
         [HttpPut( "{corpuseId}" )]
         public async Task<IActionResult> UpdateCorpuse( [FromRoute] int corpuseId, UpdateCorpuseDto updateCorpuseRequest )
         {
+            if ( corpuseId > Int32.MaxValue )
+            {
+                return BadRequest( "corpuseId value is too large." );
+            }
             UpdateCorpuseCommand updateCorpuseCommand = new UpdateCorpuseCommand()
             {
                 Id = corpuseId,

@@ -1,1 +1,12 @@
-
+<div class="audiences-wrapper">
+  <div class="column">
+    <kendo-label
+      labelCssClass="k-form-label"
+      text="Название корпуса">
+    </kendo-label>
+    <kendo-textbox class="textbox-item" [readonly]="readOnlyState"
+      [style.width.px]="250"
+      [(ngModel)]="audience.name">
+    </kendo-textbox>
+  </div>
+</div>

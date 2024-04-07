@@ -29,9 +29,9 @@ namespace Corpuses.Application.CQRSActions.Commands.UpdateCorpuse
                 return ValidationResult.Fail( "В корпусе должен быть минимум 1 этаж" );
             }
 
-            if ( await _corpuseRepository.GetByIdAsync( command.Id ) == null )
+            if ( await _corpuseRepository.GetByNameAndAddressAsync( command.Name, command.Address ) != null )
             {
-                return ValidationResult.Fail( "Корпуса с таким id нет" );
+                return ValidationResult.Fail( "Такой корпус уже есть в указанном адресе" );
             }
             return ValidationResult.Ok();
         }

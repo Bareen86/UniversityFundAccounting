@@ -1,34 +1,58 @@
-<div class="corpuse-wrapper">
-    <kendo-textbox class="textbox-item" 
-      [readonly]="readOnly"
-      [style.width.px]="200"
-      [(ngModel)]="corpuse.name"
-      required
-      name="username"
-      showErrorIcon="initial">
-    </kendo-textbox>
-    <kendo-textbox class="textbox-item"
-      [readonly]="readOnly"
-      [style.width.px]="200"
-      [(ngModel)]="corpuse.address"
-      required
-      name="username"
-      showErrorIcon="initial">
-    </kendo-textbox>
-    <kendo-textbox class="textbox-item"
-      [readonly]="readOnly"
-      [style.width.px]="100"
-      [(ngModel)]="corpuse.floorsNumber"
-      required
-      name="username"
-      showErrorIcon="initial">
-    </kendo-textbox>
-  <div class="icons-menu">
-    <div (click)="editCorpuse()" class="icon-item">
-      <kendo-icon name="pencil"></kendo-icon>
+<div class="corpuse-list-wrapper">
+  <div class="corpuse-wrapper">
+    <div class="icon-item">
+      <kendo-icon class="k-i-arrow-chevron-down"></kendo-icon>
     </div>
-    <div (click)="deleteCorpuse(corpuse.id)" class="icon-item">
-      <kendo-icon name="trash"></kendo-icon>
+    <div class="column">
+      <kendo-label
+        labelCssClass="k-form-label"
+        text="Название корпуса">
+      </kendo-label>
+      <kendo-textbox class="textbox-item" [readonly]="readOnlyState"
+        [style.width.px]="250"
+        [(ngModel)]="corpuse.name">
+      </kendo-textbox>
+      <kendo-formhint *ngIf="corpuseNameError" align="start" class="hint">{{corpuseNameError}}</kendo-formhint>
     </div>
+    <div class="column">
+      <kendo-label
+        labelCssClass="k-form-label"
+        text="Адрес">
+      </kendo-label>
+      <kendo-textbox class="textbox-item" [readonly]="readOnlyState"
+        [style.width.px]="250"
+        [(ngModel)]="corpuse.address">
+        </kendo-textbox>
+    <kendo-formhint *ngIf="corpuseAddressError" align="start" class="hint">{{corpuseAddressError}}</kendo-formhint>
+    </div>
+    <div class="column">
+      <kendo-label [style.width.px]="100"
+        labelCssClass="k-form-label"
+        text="Этажность">
+      </kendo-label>
+      <kendo-numerictextbox [readonly]="readOnlyState" [spinners]="false" format="##" [autoCorrect]="true" [min]="1" [max]="100"
+        [(ngModel)]="corpuse.floorsNumber">
+      </kendo-numerictextbox>
+    <kendo-formhint *ngIf="corpuseFloorsNumberError" align="start" class="hint">{{corpuseFloorsNumberError}}</kendo-formhint>
+    </div>
+    <div class="icons-menu" *ngIf="!editState">
+      <div (click)="SetEditState()" class="icon-item">
+        <kendo-icon name="pencil"></kendo-icon>
+      </div>
+      <div (click)="DeleteCorpuse(corpuse.id)" class="icon-item">
+        <kendo-icon name="trash"></kendo-icon>
+      </div>
+    </div>
+    <div class="icons-menu" *ngIf="editState">
+      <div (click)="UpdateCorpuse(corpuse.id, {name : corpuse.name, address : corpuse.address, floorsNumber : corpuse.floorsNumber})" class="icon-item">
+        <kendo-icon name="check"></kendo-icon>
+      </div>
+      <div (click)="CancelUpdate()" class="icon-item">
+        <kendo-icon name="close"></kendo-icon>
+      </div>
+    </div>
+  </div>
+  <div class="audiences-list-wrapper">
+    
   </div>
 </div>

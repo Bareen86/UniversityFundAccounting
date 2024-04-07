@@ -41,7 +41,7 @@
 
 /api/corpuses/3 DeleteCorpuse
 
-/api/corpuses/1
+/api/corpuses/1 UpdateCorpuse
 {
   "name": "string",
   "address": "string",
