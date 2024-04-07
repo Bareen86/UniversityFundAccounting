@@ -1,18 +1,32 @@
-.corpuse-wrapper {
+.add-corpuse-wrapper {
+  margin-top: 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 5px;
   display:  flex;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
 .icons-menu{
   margin-left: 20px;
   display: flex;
-  width: 50px;
+  width: 75px;
   justify-content: space-between;
 }
 
 .icon-item:hover {
   cursor: pointer;
+}
+
+.icon-item {
+  margin-top: 22px;
+  margin-left: -10px;
+}
+
+.hint {
+  color: red;
 }

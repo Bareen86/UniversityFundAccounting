@@ -53,7 +53,7 @@ namespace Audiences.Api.Controllers
             return Ok( commandResult );
         }
 
-        [HttpDelete("{audienceId}")]
+        [HttpDelete( "{audienceId}" )]
         public async Task<IActionResult> DeleteAudience( [FromRoute] int audienceId )
         {
             DeleteAudienceCommand deleteAudienceCommand = new DeleteAudienceCommand()
@@ -66,7 +66,7 @@ namespace Audiences.Api.Controllers
             {
                 return BadRequest( commandResult );
             }
-            return Ok(commandResult);
+            return Ok( commandResult );
         }
 
         [HttpPut( "{audienceId}" )]
@@ -102,9 +102,9 @@ namespace Audiences.Api.Controllers
 
             if ( queryResult.ValidationResult.IsFail )
             {
-                return BadRequest( queryResult.ObjResult);
+                return BadRequest( queryResult.ObjResult );
             }
-            return Ok( queryResult.ObjResult );
+            return Ok( queryResult );
         }
     }
 }

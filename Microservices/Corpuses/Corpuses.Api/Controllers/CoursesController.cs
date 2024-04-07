@@ -67,7 +67,7 @@ namespace Corpuses.Api.Controllers
             {
                 return BadRequest( queryResult.ObjResult );
             }
-            return Ok( queryResult.ObjResult );
+            return Ok( queryResult );
         }
 
         [HttpGet( "{corpuseId}" )]

@@ -1,8 +1,19 @@
-.wrapper {
-  background-color: bisque;
-  margin: 0 auto;
+.app-root-wrapper {
+  max-width: 1200px;
+  margin: 20px auto;
 }
 
-.parent {
-  display: flex;
+.corpuses-wrapper {
+  width: 550px;
+  border-radius: 5px;
+  border-color: black;
+  height: 40px;
+}
+
+.add-corpuse-form {
+  margin-bottom: 20px;
+}
+
+.add-corpuse-button {
+  margin-bottom: 10px;
 }

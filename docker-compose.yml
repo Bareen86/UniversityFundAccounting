@@ -28,13 +28,13 @@ services:
        - rabbitmq
        - corpusesdb
        - audiencesdb
-       - frontend
-  frontend:
-     build:
-       context: ./UniversityFundAccounting.Frontend
-       dockerfile: Dockerfile
-     ports:
-       - 8080:4200
+       # - frontend
+  # frontend:
+  #    build:
+  #      context: ./UniversityFundAccounting.Frontend
+  #      dockerfile: Dockerfile
+  #    ports:
+  #      - 8080:4200
   rabbitmq: 
     image: rabbitmq:management
     container_name: rabbitmq

@@ -1,0 +1,42 @@
+<div class="add-corpuse-wrapper">
+  <div class="column">
+    <kendo-label
+              labelCssClass="k-form-label"
+              text="Название корпуса">
+    </kendo-label>
+    <kendo-textbox class="textbox-item"
+      [style.width.px]="200"
+      [(ngModel)]="corpuseName"
+      required>
+    </kendo-textbox>
+  </div>
+  <div class="column">
+    <kendo-label
+              labelCssClass="k-form-label"
+              text="Адрес">
+    </kendo-label>
+    <kendo-textbox class="textbox-item"
+    [style.width.px]="200"
+    [(ngModel)]="corpuseAddress"
+    required>
+  </kendo-textbox>
+  <kendo-formhint *ngIf="validation.isFail" align="start" class="hint">Такой адрес уже есть</kendo-formhint>
+  </div>
+  <div class="column">
+    <kendo-label
+              labelCssClass="k-form-label"
+              text="Этажность">
+    </kendo-label>
+    <kendo-textbox class="textbox-item"
+    [style.width.px]="100"
+    [(ngModel)]="corpuseFloorsNumber"
+    required>
+  </kendo-textbox>
+  </div>
+  
+  <div class="icons-menu">
+    <div (click)="addCorpuse({name : corpuseName, address: corpuseAddress, floorsNumber: corpuseFloorsNumber})" class="icon-item">
+      <kendo-icon name="plus"></kendo-icon>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,34 @@
-
+<div class="corpuse-wrapper">
+    <kendo-textbox class="textbox-item" 
+      [readonly]="readOnly"
+      [style.width.px]="200"
+      [(ngModel)]="corpuse.name"
+      required
+      name="username"
+      showErrorIcon="initial">
+    </kendo-textbox>
+    <kendo-textbox class="textbox-item"
+      [readonly]="readOnly"
+      [style.width.px]="200"
+      [(ngModel)]="corpuse.address"
+      required
+      name="username"
+      showErrorIcon="initial">
+    </kendo-textbox>
+    <kendo-textbox class="textbox-item"
+      [readonly]="readOnly"
+      [style.width.px]="100"
+      [(ngModel)]="corpuse.floorsNumber"
+      required
+      name="username"
+      showErrorIcon="initial">
+    </kendo-textbox>
+  <div class="icons-menu">
+    <div (click)="editCorpuse()" class="icon-item">
+      <kendo-icon name="pencil"></kendo-icon>
+    </div>
+    <div (click)="deleteCorpuse(corpuse.id)" class="icon-item">
+      <kendo-icon name="trash"></kendo-icon>
+    </div>
+  </div>
+</div>
