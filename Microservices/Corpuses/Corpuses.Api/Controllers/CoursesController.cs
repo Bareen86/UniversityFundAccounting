@@ -40,6 +40,7 @@ namespace Corpuses.Api.Controllers
             _bus = bus;
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateCorpuse( [FromBody] CreateCorpuseDto createCorpuseRequest )
         {
             CreateCorpuseCommand createCorpuseCommand = new CreateCorpuseCommand()

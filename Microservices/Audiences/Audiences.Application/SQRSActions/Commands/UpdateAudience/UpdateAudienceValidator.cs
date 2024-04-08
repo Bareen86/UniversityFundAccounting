@@ -46,7 +46,7 @@ namespace Audiences.Application.SQRSActions.Commands.UpdateAudience
             }
             else
             {
-                if ( !await _audienceRepository.ContainsAsync( a=> a.CorpuseId == command.CorpuseId && a.AudienceNumber == command.AudienceNumber) )
+                if ( !await _audienceRepository.ContainsAsync( a => a.CorpuseId == command.CorpuseId && a.AudienceNumber == command.AudienceNumber) )
                 {
                     return ValidationResult.Ok();
                 }

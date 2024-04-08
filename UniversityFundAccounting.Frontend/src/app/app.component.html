@@ -2,15 +2,15 @@
   <h1 class="app-root-header">Список корпусов</h1>
   <div class="corpuses-wrapper">
     <div class="add-corpuse-button">
-      <button kendoButton (click)="OnButtonClick()" [themeColor]="'info'" themeColor="primary">Добавить корпус +</button>
+      <button kendoButton (click)="OnButtonClick()" [themeColor]="'info'" [size]="'small'" themeColor="primary">Добавить корпус +</button>
     </div>
     <div *ngIf="showForm" class="add-corpuse-form">
-      <app-add-corpuse-row (newCorpuseEvent)="newCorpuseEventHandler($event)"></app-add-corpuse-row>
+      <app-add-corpuse-row (newCorpuseEvent)="NewCorpuseEventHandler($event)"></app-add-corpuse-row>
     </div>
     <div *ngIf="corpuses.length === 0">
       <h3>Список корпусов пуст!</h3>
     </div>
-    <app-corpuse (deleteCorpuseEvent)="deleteCorpuseByIdHandler($event)"
+    <app-corpuse (deleteCorpuseEvent)="DeleteCorpuseByIdHandler($event)"
         *ngFor="let corpuse of corpuses"
         [corpuse]="corpuse">
     </app-corpuse>

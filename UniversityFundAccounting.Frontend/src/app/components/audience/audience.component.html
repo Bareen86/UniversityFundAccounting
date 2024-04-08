@@ -2,11 +2,68 @@
   <div class="column">
     <kendo-label
       labelCssClass="k-form-label"
-      text="Название корпуса">
+      text="Название аудитории">
     </kendo-label>
     <kendo-textbox class="textbox-item" [readonly]="readOnlyState"
-      [style.width.px]="250"
+      [style.width.px]="160"
       [(ngModel)]="audience.name">
     </kendo-textbox>
+    <kendo-formhint *ngIf="nameError" align="start" class="hint">{{nameError}}</kendo-formhint>
+  </div>
+  <div class="column">
+    <kendo-label
+      labelCssClass="k-form-label"
+      text="Тип аудитории">
+    </kendo-label>
+    <kendo-dropdownlist [data]="audienceTypeList" [(ngModel)]="selectedValue" [readonly]="readOnlyState" >
+    </kendo-dropdownlist>
+  </div>
+  <div class="column">
+    <kendo-label
+      labelCssClass="k-form-label"
+      text="Вместимость">
+    </kendo-label>
+    <kendo-numerictextbox [spinners]="false" format="##" [autoCorrect]="true" [min]="1" [max]="100" [readonly]="readOnlyState"
+      [(ngModel)]="audience.capacity">
+    </kendo-numerictextbox>
+    <kendo-formhint *ngIf="capacityError" align="start" class="hint">{{capacityError}}</kendo-formhint>
+  </div>
+  <div class="column">
+    <kendo-label
+      labelCssClass="k-form-label"
+      text="Этаж">
+    </kendo-label>
+    <kendo-numerictextbox [spinners]="false" format="##" [autoCorrect]="true" [min]="1" [max]="100" [readonly]="readOnlyState"
+      [(ngModel)]="audience.floor">
+    </kendo-numerictextbox>
+    <kendo-formhint *ngIf="floorError" align="start" class="hint">{{floorError}}</kendo-formhint>
+  </div>
+  <div class="column">
+    <kendo-label
+      labelCssClass="k-form-label"
+      text="Номер аудтории">
+    </kendo-label>
+    <kendo-numerictextbox [spinners]="false" format="##" [autoCorrect]="true" [min]="1" [max]="100" [readonly]="readOnlyState"
+      [(ngModel)]="audience.audienceNumber">
+    </kendo-numerictextbox>
+    <kendo-formhint *ngIf="audienceNumberError" align="start" class="hint">{{audienceNumberError}}</kendo-formhint>
+  </div>
+  <div class="icons-menu" *ngIf="!editState">
+    <div (click)="SetEditState()" class="icon-item">
+      <kendo-icon name="pencil"></kendo-icon>
+    </div>
+    <div (click)="DeleteAudience(audience.id)" class="icon-item">
+      <kendo-icon name="trash"></kendo-icon>
+    </div>
+  </div>
+  <div class="icons-menu" *ngIf="editState">
+    <div (click)="UpdateAudience(audience.id, {corpuseId : audience.corpuseId, name : audience.name, audienceType : audience.audienceType,
+       capacity : audience.capacity, floor : audience.floor, audienceNumber : audience.audienceNumber})" class="icon-item">
+      <kendo-icon name="check"></kendo-icon>
+    </div>
+    <div (click)="CancelUpdate()" class="icon-item">
+      <kendo-icon name="close"></kendo-icon>
+    </div>
   </div>
 </div>
+

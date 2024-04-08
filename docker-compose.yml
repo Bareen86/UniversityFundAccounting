@@ -1,49 +1,13 @@
 version: '3.4'
 
 services:
-  audiencesapi:
-     image: ${DOCKER_REGISTRY-}audiencesapi
-     build: 
-       context: .
-       dockerfile: Microservices/Audiences/Audiences.Api/Dockerfile
-     ports:
-       - 7001:80
-  corpusesapi:
-     image: ${DOCKER_REGISTRY-}corpusesapi
-     build: 
-       context: .
-       dockerfile: Microservices/Corpuses/Corpuses.Api/Dockerfile
-     ports:
-       - 7002:80
-  apigateway:
-     image: ${DOCKER_REGISTRY-}universityfundaccountingapigateway
-     build:
-       context: .
-       dockerfile: UniversityFundAccounting.ApiGateway/Dockerfile
-     ports:
-        - 5000:80
-     depends_on:
-       - audiencesapi
-       - corpusesapi
-       - rabbitmq
-       - corpusesdb
-       - audiencesdb
-       # - frontend
-  # frontend:
-  #    build:
-  #      context: ./UniversityFundAccounting.Frontend
-  #      dockerfile: Dockerfile
-  #    ports:
-  #      - 8080:4200
-  rabbitmq: 
-    image: rabbitmq:management
-    container_name: rabbitmq
-    ports:
-      - 5672:5672
-      - 15672:15672
-    hostname: rabbitmq
   audiencesdb:
     image: postgres:11.4
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -53,6 +17,11 @@ services:
       - "5434:5432"
   corpusesdb:
     image: postgres:11.4
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -60,4 +29,46 @@ services:
       - POSTGRES_DB=Corpuses
     ports:
       - "5435:5432"
+  frontend:
+     build:
+       context: ./UniversityFundAccounting.Frontend
+       dockerfile: Dockerfile
+     ports:
+       - 8080:4200
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    hostname: rabbitmq
+  audiencesapi:
+     build:
+       context: .
+       dockerfile: Microservices/Audiences/Audiences.Api/Dockerfile
+     ports:
+       - 7001:80
+     depends_on:
+      audiencesdb:
+        condition: service_healthy
+     restart: always
+  corpusesapi:
+     build:
+       context: .
+       dockerfile: Microservices/Corpuses/Corpuses.Api/Dockerfile
+     ports:
+       - 7002:80
+     depends_on:
+      corpusesdb:
+        condition: service_healthy
+     restart: always
+  apigateway:
+     build:
+       context: .
+       dockerfile: UniversityFundAccounting.ApiGateway/Dockerfile
+     ports:
+        - 5000:80
+     depends_on:
+       - audiencesapi
+       - corpusesapi
 

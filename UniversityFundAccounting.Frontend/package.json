@@ -22,7 +22,8 @@
     "@progress/kendo-angular-buttons": "15.4.0",
     "@progress/kendo-angular-common": "15.4.0",
     "@progress/kendo-angular-dateinputs": "^15.4.0",
-    "@progress/kendo-angular-icons": "^15.4.0",
+    "@progress/kendo-angular-dropdowns": "^15.4.0",
+    "@progress/kendo-angular-icons": "15.4.0",
     "@progress/kendo-angular-inputs": "15.4.0",
     "@progress/kendo-angular-intl": "15.4.0",
     "@progress/kendo-angular-l10n": "15.4.0",
@@ -35,7 +36,9 @@
     "@progress/kendo-theme-material": "^7.2.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.3"
+    "zone.js": "~0.14.3",
+    "@progress/kendo-angular-treeview": "15.4.0",
+    "@progress/kendo-drawing": "^1.17.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.3",

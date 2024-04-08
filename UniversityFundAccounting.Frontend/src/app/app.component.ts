@@ -34,11 +34,11 @@ export class AppComponent implements OnInit{
     this.showForm = !this.showForm;
   }
 
-  deleteCorpuseByIdHandler(id : number) {
+  DeleteCorpuseByIdHandler(id : number) {
     this.corpuses = this.corpuses.filter(corpuse => corpuse.id != id)
   }
 
-  newCorpuseEventHandler(occured : boolean) {
+  NewCorpuseEventHandler(occured : boolean) {
     this.corpuseService.GetCorpuses().subscribe((corpuses) => {
       this.corpuses = corpuses.objResult;
     })

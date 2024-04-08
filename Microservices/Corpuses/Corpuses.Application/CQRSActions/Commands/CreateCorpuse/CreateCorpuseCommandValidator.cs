@@ -21,7 +21,7 @@ namespace Corpuses.Application.CQRSActions.Commands.CreateCorpuse
 
             if ( command.Address == null || command.Address == String.Empty )
             {
-                return ValidationResult.Fail( "Адресс не должен быть пустым" );
+                return ValidationResult.Fail( "Адрес не должен быть пустым" );
             }
 
             if ( command.FloorsNumber <= 0 )

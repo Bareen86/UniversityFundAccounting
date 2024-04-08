@@ -1,0 +1,57 @@
+<div class="audiences-wrapper">
+  <div class="column">
+    <kendo-label
+      labelCssClass="k-form-label"
+      text="Название аудитории">
+    </kendo-label>
+    <kendo-textbox class="textbox-item" 
+      [style.width.px]="160"
+      [(ngModel)]="name">
+    </kendo-textbox>
+    <kendo-formhint *ngIf="nameError" align="start" class="hint">{{nameError}}</kendo-formhint>
+  </div>
+  <div class="column">
+    <kendo-label
+      labelCssClass="k-form-label"
+      text="Тип аудитории">
+    </kendo-label>
+    <kendo-dropdownlist [data]="audienceTypeList" [(ngModel)]="selectedValue" >
+    </kendo-dropdownlist>
+  </div>
+  <div class="column">
+    <kendo-label
+      labelCssClass="k-form-label"
+      text="Вместимость">
+    </kendo-label>
+    <kendo-numerictextbox [spinners]="false" format="##" [autoCorrect]="true" [min]="1" [max]="100"
+      [(ngModel)]="capacity">
+    </kendo-numerictextbox>
+    <kendo-formhint *ngIf="capacityError" align="start" class="hint">{{capacityError}}</kendo-formhint>
+  </div>
+  <div class="column">
+    <kendo-label
+      labelCssClass="k-form-label"
+      text="Этаж">
+    </kendo-label>
+    <kendo-numerictextbox [spinners]="false" format="##" [autoCorrect]="true" [min]="1" [max]="100"
+      [(ngModel)]="floor">
+    </kendo-numerictextbox>
+    <kendo-formhint *ngIf="floorError" align="start" class="hint">{{floorError}}</kendo-formhint>
+  </div>
+  <div class="column">
+    <kendo-label
+      labelCssClass="k-form-label"
+      text="Номер аудтории">
+    </kendo-label>
+    <kendo-numerictextbox [spinners]="false" format="##" [autoCorrect]="true" [min]="1" [max]="100"
+      [(ngModel)]="audienceNumber">
+    </kendo-numerictextbox>
+    <kendo-formhint *ngIf="audienceNumberError" align="start" class="hint">{{audienceNumberError}}</kendo-formhint>
+  </div>
+  <div class="icons-menu">
+    <div (click)="CreateAudience({corpuseId : corpuseId, name : name, audienceType : audienceType,
+       capacity : capacity, floor : floor, audienceNumber : audienceNumber })" class="icon-item">
+      <kendo-icon name="plus"></kendo-icon>
+    </div>
+  </div>
+</div>

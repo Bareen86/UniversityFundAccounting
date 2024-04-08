@@ -18,7 +18,7 @@ namespace Audiences.Application.SQRSActions.Commands.CreateAudience
 
             if ( await _audienceRepository.ContainsAsync( a => a.AudienceNumber == command.AudienceNumber && a.CorpuseId == command.CorpuseId) )
             {
-                return ValidationResult.Fail("Аудитория в таком корпусе уже есть");
+                return ValidationResult.Fail( "Такая аудитория в корпусе уже есть" );
             }
 
             if ( command.Name == null || command.Name == String.Empty )
@@ -38,7 +38,7 @@ namespace Audiences.Application.SQRSActions.Commands.CreateAudience
 
             if ( command.Floor <= 0 )
             {
-                return ValidationResult.Fail( "Этаж должна быть больше 0" );
+                return ValidationResult.Fail( "Этаж должен быть больше 0" );
             }
 
             if ( command.AudienceNumber <= 0 )

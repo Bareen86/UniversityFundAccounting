@@ -1,6 +1,6 @@
 <div class="corpuse-list-wrapper">
   <div class="corpuse-wrapper">
-    <div class="icon-item">
+    <div class="icon-item" (click)="ShowAudiences()">
       <kendo-icon class="k-i-arrow-chevron-down"></kendo-icon>
     </div>
     <div class="column">
@@ -52,7 +52,16 @@
       </div>
     </div>
   </div>
-  <div class="audiences-list-wrapper">
-    
+  <div class="audiences-list-wrapper" *ngIf="showAudiencesState">
+    <div class="add-corpuse-button">
+      <button kendoButton (click)="ShowAddAudience()"  [themeColor]="'info'" [size]="'small'" themeColor="primary">Добавить аудиторию +</button>
+    </div>
+    <div *ngIf="showAddAudienceForm" class="add-corpuse-form">
+      <app-add-audience-row (newAudienceEvent)="NewAudienceEventHandler($event)" [corpuseId]="corpuse.id"></app-add-audience-row>
+    </div>
+    <app-audience (deleteAudienceEvent)="DeleteAudienceByIdHandler($event)"
+        *ngFor="let audience of audiences"
+        [audience]="audience">
+    </app-audience>
   </div>
 </div>

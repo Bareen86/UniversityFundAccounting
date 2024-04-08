@@ -1,4 +1,5 @@
-.corpuse-wrapper {
+.audiences-wrapper {
+  margin-top:10px;
   display: flex;
   justify-content: space-between;
   gap: 5px;
@@ -28,9 +29,4 @@
 
 .hint {
   color: red;
-}
-
-.audiences-list-wrapper {
-  margin-top: 10px;
-  margin-left: 50px;
 }

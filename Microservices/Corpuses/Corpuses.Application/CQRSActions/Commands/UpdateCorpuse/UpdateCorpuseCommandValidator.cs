@@ -1,4 +1,5 @@
 ﻿using Corpuses.Application.Validation;
+using Corpuses.Domain;
 using Corpuses.Domain.Repositories;
 
 namespace Corpuses.Application.CQRSActions.Commands.UpdateCorpuse
@@ -21,12 +22,18 @@ namespace Corpuses.Application.CQRSActions.Commands.UpdateCorpuse
 
             if ( command.Address == null || command.Address == String.Empty )
             {
-                return ValidationResult.Fail( "Адресс не должен быть пустым" );
+                return ValidationResult.Fail( "Адрес не должен быть пустым" );
             }
 
             if ( command.FloorsNumber <= 0 )
             {
                 return ValidationResult.Fail( "В корпусе должен быть минимум 1 этаж" );
+            }
+
+            Corpuse corpuse = await _corpuseRepository.GetByIdAsync( command.Id );
+            if ( corpuse.Address == command.Address && corpuse.Name == command.Name )
+            {
+                return ValidationResult.Ok();
             }
 
             if ( await _corpuseRepository.GetByNameAndAddressAsync( command.Name, command.Address ) != null )

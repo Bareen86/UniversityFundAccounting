@@ -24,8 +24,8 @@ export class AudienceService {
     return throwError(() => new Error('Bad request'));
   }
 
-  GetCorpuseAudiences() : Observable<GetAudiencesQueryResult> {
-    return this.http.get<GetAudiencesQueryResult>(this.baseUrl)
+  GetCorpuseAudiences(id : number) : Observable<GetAudiencesQueryResult> {
+    return this.http.get<GetAudiencesQueryResult>(`${this.baseUrl}/${id}`)
   }
 
   public CreateAudience(corpuse : ICreateAudience) : Observable<IValidationResult> {
