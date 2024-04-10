@@ -1,10 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { GetAudiencesQueryResult } from '../Models/result-request/audience/GetAudiencesQueryResult';
 import { ICreateAudience } from '../Models/command/audience/ICreateAudience';
 import { IValidationResult } from '../Models/IValidationResult';
 import { IUpdateAudience } from '../Models/command/audience/IUpdateAudience';
+import { GetAudiencesQueryResult } from '../Models/result-request/Audience/GetAudiencesQueryResult';
 
 @Injectable({providedIn: 'root'})
 export class AudienceService {
